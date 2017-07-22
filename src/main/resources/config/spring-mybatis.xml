@@ -11,6 +11,7 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context.xsd">
 	
+	
 	<!-- 扫描Mapper -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.belling.admin.mapper" />
@@ -79,5 +80,7 @@
 		<property name="plugins">
 			<ref bean="paginationInterceptor" />
 		</property>
+		<property name="configLocation" value="classpath:config/mybatis-config.xml"></property>
 	</bean>
+	
 </beans>

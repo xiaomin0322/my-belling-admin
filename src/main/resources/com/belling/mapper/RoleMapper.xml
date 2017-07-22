@@ -7,8 +7,12 @@
      	WHERE id = #{id}
     </select>
     
-	<insert id="insert" parameterType="Role" statementType="PREPARED" useGeneratedKeys="false" keyProperty="id">
+	<insert id="insert" parameterType="Role" statementType="PREPARED" >
+	 <selectKey resultType="java.lang.Integer" order="BEFORE" keyProperty="id">    
+            select SYS_ROLE_seq.nextval from dual    
+        </selectKey>  
 		INSERT INTO SYS_ROLE(
+		    id,
 			name,
 			code,
 			sort,
@@ -16,6 +20,7 @@
 			isEnable
 		) 
 		VALUES (
+		    #{id},
 			#{name},
 			#{code},
 			#{sort},

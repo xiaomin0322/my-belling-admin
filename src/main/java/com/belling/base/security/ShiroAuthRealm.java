@@ -94,6 +94,7 @@ public class ShiroAuthRealm extends AuthorizingRealm {
 			}
 		}
 		permissions.remove("");
+		permissions.remove(null);
 		info.addStringPermissions(permissions);
 		return info;
 	}

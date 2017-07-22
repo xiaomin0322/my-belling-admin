@@ -149,7 +149,7 @@ public class PaginationInterceptor implements Interceptor {
 		pageSql.append("  ) r ");
 		pageSql.append(" where ROWNUM <= "+pagination.getPageSize()+" ");
 		pageSql.append("          ) table_alias ");
-		pageSql.append("  WHERE table_alias.rowno > "+(pagination.getPageNo() - 1) * pagination.getPageSize()+"; ");
+		pageSql.append("  WHERE table_alias.rowno > "+(pagination.getPageNo() - 1) * pagination.getPageSize());
 		
 		System.out.println("分页sql: " +pageSql.toString());
 		

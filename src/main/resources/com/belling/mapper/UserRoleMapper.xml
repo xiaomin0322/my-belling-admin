@@ -13,12 +13,18 @@
 		</if>
 	</select>
 
-	<insert id="insert" parameterType="UserRole" statementType="PREPARED" useGeneratedKeys="false" keyProperty="id">
+	<insert id="insert" parameterType="UserRole" statementType="PREPARED">
+	 <selectKey resultType="java.lang.Integer" order="BEFORE" keyProperty="id">    
+            select SYS_RE_USER_ROLE.nextval from dual    
+        </selectKey>  
+        
 		INSERT INTO SYS_RE_USER_ROLE(
+		    id,
 			userId,
 			roleId
 		) 
 		VALUES (
+		    #{id},
 			#{userId},
 			#{roleId}
 		)

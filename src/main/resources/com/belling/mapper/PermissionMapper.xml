@@ -7,8 +7,12 @@
 		WHERE id = #{id}
 	</select>
 	
-	<insert id="insert" parameterType="Permission" statementType="PREPARED" useGeneratedKeys="false" keyProperty="id">
+	<insert id="insert" parameterType="Permission" statementType="PREPARED">
+	  <selectKey resultType="java.lang.Integer" order="BEFORE" keyProperty="id">    
+            select SYS_PERMISSION_seq.nextval from dual    
+        </selectKey>  
 		INSERT INTO SYS_PERMISSION(
+		    id,
 			pId,
 			icon,
 			name,
@@ -19,6 +23,7 @@
 			isEnable
 		) 
 		VALUES (
+		    #{id},
 			#{pId},
 			#{icon},
 			#{name},
