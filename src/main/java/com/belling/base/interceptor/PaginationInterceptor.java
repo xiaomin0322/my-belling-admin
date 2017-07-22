@@ -147,7 +147,7 @@ public class PaginationInterceptor implements Interceptor {
 		pageSql.append(" FROM  ( ");
 		pageSql.append(sql);       		   
 		pageSql.append("  ) r ");
-		pageSql.append(" where ROWNUM <= "+pagination.getPageSize()+" ");
+		pageSql.append(" where ROWNUM <= "+(pagination.getPageNo() * pagination.getPageSize())+" ");
 		pageSql.append("          ) table_alias ");
 		pageSql.append("  WHERE table_alias.rowno > "+(pagination.getPageNo() - 1) * pagination.getPageSize());
 		
