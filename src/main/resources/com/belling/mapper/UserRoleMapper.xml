@@ -15,7 +15,7 @@
 
 	<insert id="insert" parameterType="UserRole" statementType="PREPARED">
 	 <selectKey resultType="java.lang.Integer" order="BEFORE" keyProperty="id">    
-            select SYS_RE_USER_ROLE.nextval from dual    
+            select SYS_RE_USER_ROLE_seq.nextval from dual    
         </selectKey>  
         
 		INSERT INTO SYS_RE_USER_ROLE(
