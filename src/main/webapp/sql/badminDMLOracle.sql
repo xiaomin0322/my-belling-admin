@@ -96,5 +96,6 @@ INSERT INTO sys_settings VALUES ('kill_login', '1');
 INSERT INTO sys_settings VALUES ('error_times_login', '2');
 INSERT INTO sys_settings VALUES ('site_copyright', '蝴蝶飞飞');
 INSERT INTO sys_settings VALUES ('site_keywords', '百灵，权限，用户， 角色');
-INSERT INTO sys_user VALUES ('2', 'admin', '6b1a2c3a1615cf2ff8a581218bab703a', '192.168.1.122', '2017-06-12 15:58:10', '2', '2015-06-02 11:31:56', '1');
-INSERT INTO sys_user VALUES ('3', 'test', '6b1a2c3a1615cf2ff8a581218bab703a', null, null, '0', '2017-06-12 17:22:44', '1');
+
+INSERT INTO sys_user VALUES ('2', 'admin', '6b1a2c3a1615cf2ff8a581218bab703a', '192.168.1.122', NULL, '2',NULL, '1');
+INSERT INTO sys_user VALUES ('3', 'test', '6b1a2c3a1615cf2ff8a581218bab703a', null, null, '0', NULL, '1');
