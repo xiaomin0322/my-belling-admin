@@ -6,8 +6,6 @@ delete from sys_settings;
 delete from sys_re_role_permission;
 
 
-INSERT INTO sys_login_log VALUES ('272', 'admin', '2017-06-30 17:43:22', '192.168.1.122', '', '', '', '', '1', '登录成功');
-INSERT INTO sys_login_log VALUES ('273', 'admin', '2017-06-30 17:52:18', '192.168.1.122', '', '', '', '', '1', '登录成功');
 INSERT INTO sys_permission VALUES ('3', '46', '用户管理', 'admin/user', '1', '1', '1', 'fa-user', '');
 INSERT INTO sys_permission VALUES ('4', '46', '角色管理', 'admin/role', '2', '1', '1', 'fa-user-secret', '');
 INSERT INTO sys_permission VALUES ('5', '46', '权限管理', 'admin/permission', '3', '1', '1', 'fa-key', '');
