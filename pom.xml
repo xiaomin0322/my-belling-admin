@@ -287,11 +287,21 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+			
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${slf4j.version}</version>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.oracle/ojdbc6 -->
+		<dependency>
+    <groupId>cn.guoyukun.jdbc</groupId>
+    <artifactId>oracle-ojdbc6</artifactId>
+    <version>11.2.0.3.0</version>
+</dependency>
+
+		
 	</dependencies>
 	<build>
 		<finalName>belling-admin</finalName>
@@ -372,4 +382,6 @@
 			<url>http://repo.spring.io/libs-snapshot</url>
 		</repository>
 	</repositories> -->
+	
+	
 </project>

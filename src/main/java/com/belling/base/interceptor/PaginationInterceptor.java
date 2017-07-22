@@ -138,8 +138,21 @@ public class PaginationInterceptor implements Interceptor {
 	}
 
 	public String buildPageSql(String sql, Pagination<?> pagination) {
-		StringBuilder pageSql = new StringBuilder(sql);
-		pageSql.append(" LIMIT " + (pagination.getPageNo() - 1) * pagination.getPageSize() + "," + pagination.getPageSize());
+		StringBuilder pageSql = new StringBuilder();
+		//pageSql.append(" LIMIT " + (pagination.getPageNo() - 1) * pagination.getPageSize() + "," + pagination.getPageSize());
+		//pageSql.append(" LIMIT " + (pagination.getPageNo() - 1) * pagination.getPageSize() + "," + pagination.getPageSize());
+		
+		pageSql.append("SELECT * ");
+		pageSql.append(" FROM (SELECT ROWNUM AS rowno,r.* ");
+		pageSql.append(" FROM  ( ");
+		pageSql.append(sql);       		   
+		pageSql.append("  ) r ");
+		pageSql.append(" where ROWNUM <= "+pagination.getPageSize()+" ");
+		pageSql.append("          ) table_alias ");
+		pageSql.append("  WHERE table_alias.rowno > "+(pagination.getPageNo() - 1) * pagination.getPageSize()+"; ");
+		
+		System.out.println("分页sql: " +pageSql.toString());
+		
 		return pageSql.toString();
 	}
 

@@ -10,8 +10,13 @@
     </select>
     
     <!-- 用户添加  -->
-	<insert id="insert" parameterType="User" statementType="PREPARED" useGeneratedKeys="true" keyProperty="id">
+	<insert id="insert" parameterType="User" statementType="PREPARED" >
+	   <selectKey resultType="java.lang.Integer" order="BEFORE" keyProperty="id">    
+            select sys_user_seq.nextval from dual    
+        </selectKey>  
+        
 		INSERT INTO SYS_USER(
+		    id,
 			account,
 			password,
 			lastLoginIp,
@@ -21,6 +26,7 @@
 			isEnable
 		) 
 		VALUES (
+		    #{id},
 			#{account},
 			#{password},
 			#{lastLoginIp},
@@ -33,10 +39,10 @@
 	
     <update id="update" parameterType="User" statementType="PREPARED">
 		UPDATE SYS_USER a SET
-			a.`account` = #{account},
-			a.`password` = #{password},
+			a.account = #{account},
+			a.password = #{password},
 			a.isEnable = #{isEnable}
-		WHERE a.`id` = #{id}
+		WHERE a.id = #{id}
 	</update>
 	
 	<update id="enable" parameterType="map" statementType="PREPARED">
@@ -44,7 +50,7 @@
 			a.isEnable = #{isEnable}
 		WHERE 1 = 1
 		<if test="idList != null">
-			AND a.`id` in <foreach collection="idList" item="item" open="(" separator="," close=")">#{item}</foreach>
+			AND a.id in <foreach collection="idList" item="item" open="(" separator="," close=")">#{item}</foreach>
 		</if>
 	</update>
 	
@@ -53,7 +59,7 @@
 			a.password = #{password}
 		WHERE 1 = 1
 		<if test="idList != null">
-			AND a.`id` in <foreach collection="idList" item="item" open="(" separator="," close=")">#{item}</foreach>
+			AND a.id in <foreach collection="idList" item="item" open="(" separator="," close=")">#{item}</foreach>
 		</if>
 	</update>
 	
@@ -83,10 +89,10 @@
 				WHERE 1 != 1
 			</when>
 			<when test="list.size() == 1">
-				WHERE `id` = <foreach collection="list" item="id">#{id}</foreach>
+				WHERE id = <foreach collection="list" item="id">#{id}</foreach>
 			</when>
 			<otherwise>
-				WHERE `id` in <foreach collection="list" item="id" open="(" separator="," close=")">#{id}</foreach>
+				WHERE id in <foreach collection="list" item="id" open="(" separator="," close=")">#{id}</foreach>
 			</otherwise>
 		</choose>
 	</delete>

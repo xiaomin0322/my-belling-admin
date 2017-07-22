@@ -7,7 +7,7 @@
 		WHERE id = #{id}
 	</select>
 	
-	<insert id="insert" parameterType="Permission" statementType="PREPARED" useGeneratedKeys="true" keyProperty="id">
+	<insert id="insert" parameterType="Permission" statementType="PREPARED" useGeneratedKeys="false" keyProperty="id">
 		INSERT INTO SYS_PERMISSION(
 			pId,
 			icon,
@@ -32,15 +32,15 @@
 	
     <update id="update" parameterType="Permission" statementType="PREPARED">
 		UPDATE SYS_PERMISSION a SET
-			a.`pId` = #{pId},
-			a.`icon` = #{icon},
-			a.`name` = #{name},
-			a.`permission` = #{permission},
-			a.`url` = #{url},
-			a.`sort` = #{sort},
-			a.`isMenu` = #{isMenu},
+			a.pId = #{pId},
+			a.icon = #{icon},
+			a.name = #{name},
+			a.permission = #{permission},
+			a.url = #{url},
+			a.sort = #{sort},
+			a.isMenu = #{isMenu},
 			a.isEnable = #{isEnable}
-		WHERE a.`id` = #{id}
+		WHERE a.id = #{id}
 	</update>
 	
 	<update id="enable" parameterType="map" statementType="PREPARED">
@@ -48,7 +48,7 @@
 			a.isEnable = #{isEnable}
 		WHERE 1 = 1
 		<if test="idList != null">
-			AND a.`id` in <foreach collection="idList" item="item" open="(" separator="," close=")">#{item}</foreach>
+			AND a.id in <foreach collection="idList" item="item" open="(" separator="," close=")">#{item}</foreach>
 		</if>
 	</update>
 	
@@ -85,10 +85,10 @@
 				WHERE 1 != 1
 			</when>
 			<when test="list.size() == 1">
-				WHERE `id` = <foreach collection="list" item="id">#{id}</foreach>
+				WHERE id = <foreach collection="list" item="id">#{id}</foreach>
 			</when>
 			<otherwise>
-				WHERE `id` in <foreach collection="list" item="id" open="(" separator="," close=")">#{id}</foreach>
+				WHERE id in <foreach collection="list" item="id" open="(" separator="," close=")">#{id}</foreach>
 			</otherwise>
 		</choose>
 	</delete>
