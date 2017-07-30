@@ -1,5 +1,20 @@
 package com.belling.admin.controller.houtai;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.io.IOUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +29,7 @@ import com.belling.base.controller.BaseController;
 import com.belling.base.model.Pagination;
 import com.belling.base.model.ResponseResult;
 import com.belling.base.model.TablePageResult;
+import com.belling.base.util.JxlsUtils;
 
 /**  
  * <pre>
@@ -51,6 +67,40 @@ public class RoleController extends BaseController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model) {
 		return "/role/list";
+	}
+	
+	@RequestMapping(value = "/rolesExport")
+	public void export(HttpServletRequest request,HttpServletResponse response) {
+	    List<Role> rolesList = roleService.findAll(true);
+	    Map<String , Object> model=new HashMap<String , Object>();
+        model.put("roles", rolesList);
+        model.put("nowdate", new Date());
+        
+	    String destFileName = "roles_template_output.xls";
+	    String templateFileName = "roles_template.xls";
+	    InputStream in=null;  
+        OutputStream out=null;  
+        //设置响应  
+        response.setHeader("Content-Disposition", "attachment;filename=" + destFileName);  
+        //response.setContentType("application/vnd.ms-excel");  
+        //response.setContentType("application/x-download");
+        //response.setContentType("application/vnd.ms-excel;charset=utf-8");
+        response.setContentType("application/octet-stream");
+        try {  
+            in=new BufferedInputStream(new FileInputStream(JxlsUtils.getTemplate(templateFileName)));  
+            out=response.getOutputStream();  
+            //FileOutputStream fileOutputStream = new FileOutputStream(destFileName);
+            //JxlsUtils.exportExcel(in,fileOutputStream,model);
+            //out.write(IOUtils.toByteArray(new FileInputStream(destFileName)));
+            JxlsUtils.exportExcel(in,out,model);
+            //将内容写入输出流并把缓存的内容全部发出去  
+            out.flush();  
+        } catch (Exception e) {  
+            e.printStackTrace();  
+        } finally {  
+            if (in!=null){try {in.close();} catch (IOException e) {}}  
+            if (out!=null){try {out.close();} catch (IOException e) {}}  
+        }  
 	}
 	
 	/**

@@ -122,5 +122,36 @@ layui.define(['layer'], function (exports) {
 		return (timestamp / 1000);
 	}
 	
+	//给列加名称
+	jacommon.addTableColumnNames = function(columnNames,name) {
+		if(name==null){
+			name = 'fname';
+		}
+		if(columnNames==null){
+			return ;
+		}
+		var fnames = columnNames;
+		fnames.forEach(function(item,index){
+			 $('#dataTable tr').each(function(i){
+				 $(this).find('td:eq('+index+')').attr(name,item);
+				 $(this).find('th:eq('+index+')').attr(name,item);
+		  });
+		});
+	}
+	
+	//隐藏列
+	jacommon.hideTableColumns = function(showField,name) {
+		if(name==null){
+			name = 'fname';
+		}
+		if(showField!=null && showField!=''){
+			  $('#dataTable tr').children().each(function(j,obj){
+				  var fnametd = $(obj).attr(name);
+				  if(fnametd!=null && showField.indexOf(fnametd) == -1){
+					  $(obj).hide();
+				  }
+			  });
+		  }
+	}
 	exports("jacommon", jacommon);
 });

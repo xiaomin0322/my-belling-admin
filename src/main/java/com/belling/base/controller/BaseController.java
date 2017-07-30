@@ -10,6 +10,14 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+
+import com.belling.admin.model.Permission;
+import com.belling.admin.model.User;
+import com.belling.admin.service.PermissionService;
+import com.belling.base.util.ServletUtil;
+import com.belling.base.util.SpringContextHolder;
 import com.google.common.base.Strings;
 
 
@@ -19,6 +27,68 @@ import com.google.common.base.Strings;
  * @author Sunny
  */
 public class BaseController {
+	
+	
+	/**
+	 * 获取匹配的显示字段字符串
+	 * @param permissionPrefix
+	 * @return String
+	 */
+	public String findPermissionByUserIdShowField(String permissionPrefix) {
+		User user = (User) ServletUtil.getSession().getAttribute("user");
+		List<Permission> permissions = SpringContextHolder.getBean(PermissionService.class).findListByUserId(user
+				.getId());
+		StringBuilder showFieldBuilder = new StringBuilder();
+		if (CollectionUtils.isEmpty(permissions)) {
+			return showFieldBuilder.toString();
+		}
+		//当前权限对象
+		Permission permissionPrefixObj = null;
+		for (Permission p : permissions) {
+			if (p == null) {
+				continue;
+			}
+			// 权限标志
+			String permission = p.getPermission();
+			//根据权限标示，获取当前权限对象
+			if (permissionPrefix.equalsIgnoreCase(permission)) {
+				permissionPrefixObj = p;
+			}
+		}
+		
+		if (permissionPrefixObj != null) {
+				for (Permission perm : permissions) {
+					if (perm == null) {
+						continue;
+					}
+					// 权限标志
+					String permission = perm.getPermission();
+					Integer pid = perm.getPId();
+					//如果是当前权限下的子权限，并且是以当前权限标志打头的，则是配置字段
+					if (pid!=null && permissionPrefixObj.getId().intValue() == pid
+							.intValue()
+							&& StringUtils.isNotBlank(permission)
+							&& permission.startsWith(permissionPrefix)
+							&& !permissionPrefix.equalsIgnoreCase(permission)) {
+						String url = perm.getUrl();
+						if (StringUtils.isNotBlank(url)) {
+							showFieldBuilder.append(url).append(",");
+						}
+					}
+				}
+			System.out
+					.println("findPermissionByUserIdShowField permissionPrefix : "
+							+ permissionPrefix
+							+ " showFieldBuilder : "
+							+ showFieldBuilder.toString());
+
+		}
+
+		return showFieldBuilder.toString();
+	}
+	
+	
+	
 
 	private Integer[] getAjaxIds(final String str, final String separator) {
 		Integer[] ids = null;

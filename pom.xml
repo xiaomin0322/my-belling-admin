@@ -292,6 +292,18 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>${slf4j.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.jxls</groupId>
+			<artifactId>jxls</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.jxls</groupId>
+			<artifactId>jxls-poi</artifactId>
+			<version>1.0.9</version>
+		</dependency>
+		
 	</dependencies>
 	<build>
 		<finalName>belling-admin</finalName>
@@ -364,12 +376,12 @@
 		</plugins>
 	</build>
 	
-	<!-- 镜像地址 
+	<!-- 镜像地址 -->
 	<repositories>
 		<repository>
 			<id>spring-libs-snapshot</id>
 			<name>Spring Snapshot Repository</name>
 			<url>http://repo.spring.io/libs-snapshot</url>
 		</repository>
-	</repositories> -->
+	</repositories> 
 </project>
