@@ -303,6 +303,13 @@
 			<artifactId>jxls-poi</artifactId>
 			<version>1.0.9</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/net.sf.jxls/jxls-reader -->
+		<dependency>
+		    <groupId>net.sf.jxls</groupId>
+		    <artifactId>jxls-reader</artifactId>
+		    <version>1.0.6</version>
+		</dependency>
+		
 		
 	</dependencies>
 	<build>

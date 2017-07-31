@@ -1,5 +1,6 @@
 package com.belling.base.util;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -8,14 +9,22 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import net.sf.jxls.reader.ReaderBuilder;
+import net.sf.jxls.reader.XLSReadStatus;
+import net.sf.jxls.reader.XLSReader;
 
 import org.jxls.common.Context;
 import org.jxls.expression.JexlExpressionEvaluator;
 import org.jxls.transform.Transformer;
 import org.jxls.util.JxlsHelper;
+
+import com.belling.admin.model.Role;
 
 /**
  * 
@@ -83,5 +92,31 @@ public class JxlsUtils{
     public Object ifelse(boolean b, Object o1, Object o2) {
         return b ? o1 : o2;
     }
+    
+    
+    /** 
+     * 使用jxls解析导入的Excel 
+     * @param path 导入文件路径 
+     * @return List<VideoInfo> 导入对象集合 
+     */  
+    public static <T> List<T> getExcelData(File path,File inputXML,Class<T> clazz){  
+        List<T> objInfoList = new ArrayList<T>();  
+        try {  
+            XLSReader mainReader = ReaderBuilder.buildFromXML( inputXML );  
+            InputStream inputXLS = new BufferedInputStream(new FileInputStream(path));  
+            Map<String,Object> beans = new HashMap<String,Object>();  
+            T t = clazz.newInstance();
+            beans.put("objInfo", t);  
+            beans.put("objList", objInfoList);  
+            XLSReadStatus readStatus = mainReader.read( inputXLS, beans);  
+            if(readStatus.isStatusOK()){  
+                System.out.println("jxls读取Excel成功！");  
+            }  
+        } catch (Exception e) {  
+            e.printStackTrace();  
+        }  
+        return objInfoList;  
+    }
+    
     
 }
