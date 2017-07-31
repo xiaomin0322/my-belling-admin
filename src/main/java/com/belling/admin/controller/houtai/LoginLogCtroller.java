@@ -2,6 +2,7 @@ package com.belling.admin.controller.houtai;
 
 import java.io.File;
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,11 +19,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.belling.admin.model.LoginLog;
+import com.belling.admin.model.Role;
 import com.belling.admin.service.LoginLogService;
 import com.belling.base.controller.BaseController;
 import com.belling.base.model.Pagination;
 import com.belling.base.model.ResponseResult;
 import com.belling.base.model.TablePageResult;
+import com.belling.base.util.JxlsUtils;
 import com.google.common.base.Strings;
 
 /**  
@@ -85,6 +88,11 @@ public class LoginLogCtroller extends BaseController {
         } catch (Exception e) {  
             e.printStackTrace();  
         }  
+        
+        List<Role> roles = JxlsUtils.getExcelData(JxlsUtils.getTemplate("roles_output_test.xls"), JxlsUtils.getTemplate("roles_config.xml"), Role.class);
+		for(Role r:roles){
+			System.out.println("=========="+r.getName());
+		}
         model.addAttribute("fileUrl", request.getContextPath()+"/upload/"+fileName);  
         return "result";  
     } 

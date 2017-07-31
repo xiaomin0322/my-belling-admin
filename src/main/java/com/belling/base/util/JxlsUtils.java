@@ -105,8 +105,8 @@ public class JxlsUtils{
             XLSReader mainReader = ReaderBuilder.buildFromXML( inputXML );  
             InputStream inputXLS = new BufferedInputStream(new FileInputStream(path));  
             Map<String,Object> beans = new HashMap<String,Object>();  
-            T t = clazz.newInstance();
-            beans.put("objInfo", t);  
+            //T t = clazz.newInstance();
+            //beans.put("objInfo", t);  
             beans.put("objList", objInfoList);  
             XLSReadStatus readStatus = mainReader.read( inputXLS, beans);  
             if(readStatus.isStatusOK()){  
