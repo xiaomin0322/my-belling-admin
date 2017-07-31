@@ -37,9 +37,11 @@
 						<a class="layui-btn layui-btn-primary radius" id="btn-delete-all">
 							 <i class="layui-icon">&#xe640;</i> 清理
 						</a>
+						
 	 				</div>
 				</div>
  			</form>
+ 			<input type="file" name="file" lay-type="file" class="layui-upload-file">
  			</@shiro.hasPermission> 
 		</span>
 		<span class="fr">
@@ -92,5 +94,18 @@
 	<#-- 包含分页插件 -->
 	<#include "/widget/paging-js.ftl"> 
 	<script type="text/javascript" src="${base}/static/js/app/loginlog/listShowField.js"></script>
+	
+	<script>
+layui.use('upload', function(){
+  layui.upload({
+    url: WEB_ROOT+'/admin/loginlog/upload' //上传接口
+    ,success: function(res){ //上传成功后的回调
+      alert(res);
+      console.log(res)
+    }
+  });
+});
+</script>
+
 </body>
 </html>

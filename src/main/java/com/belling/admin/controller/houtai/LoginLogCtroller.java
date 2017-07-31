@@ -1,30 +1,28 @@
 package com.belling.admin.controller.houtai;
 
+import java.io.File;
 import java.sql.Timestamp;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.io.FileUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.belling.admin.model.LoginLog;
-import com.belling.admin.model.Permission;
-import com.belling.admin.model.User;
 import com.belling.admin.service.LoginLogService;
-import com.belling.admin.service.PermissionService;
 import com.belling.base.controller.BaseController;
 import com.belling.base.model.Pagination;
 import com.belling.base.model.ResponseResult;
 import com.belling.base.model.TablePageResult;
-import com.belling.base.util.ServletUtil;
 import com.google.common.base.Strings;
 
 /**  
@@ -66,6 +64,30 @@ public class LoginLogCtroller extends BaseController {
 		return "/loginlog/listShowField";
 	}
 	
+	
+    @RequestMapping(value = "/upload")  
+    @ResponseBody
+    public String upload(@RequestParam(value = "file", required = false) MultipartFile file, HttpServletRequest request, ModelMap model) {  
+        System.out.println("开始");  
+        String path = request.getSession().getServletContext().getRealPath("upload");  
+        String fileName = file.getOriginalFilename();  
+//        String fileName = new Date().getTime()+".jpg";  
+        System.out.println(path);  
+        File targetFile = new File(path, fileName);  
+        if(!targetFile.exists()){  
+            targetFile.mkdirs();  
+        }  
+        //保存  
+        try {  
+            file.transferTo(targetFile);
+           String content = FileUtils.readFileToString(targetFile);
+           System.out.println("文件内容为："+content);
+        } catch (Exception e) {  
+            e.printStackTrace();  
+        }  
+        model.addAttribute("fileUrl", request.getContextPath()+"/upload/"+fileName);  
+        return "result";  
+    } 
 	
 	/**
 	 * 用户分页
