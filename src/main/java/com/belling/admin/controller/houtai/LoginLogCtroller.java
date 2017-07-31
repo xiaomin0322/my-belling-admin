@@ -89,9 +89,9 @@ public class LoginLogCtroller extends BaseController {
             e.printStackTrace();  
         }  
         
-        List<Role> roles = JxlsUtils.getExcelData(JxlsUtils.getTemplate("roles_output_test.xls"), JxlsUtils.getTemplate("roles_config.xml"), Role.class);
+        List<Role> roles = JxlsUtils.getExcelData(targetFile, JxlsUtils.getTemplate("roles_config.xml"), Role.class);
 		for(Role r:roles){
-			System.out.println("=========="+r.getName());
+			System.out.println("role.name=========="+r.getName());
 		}
         model.addAttribute("fileUrl", request.getContextPath()+"/upload/"+fileName);  
         return "result";  
