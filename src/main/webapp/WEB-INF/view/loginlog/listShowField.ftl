@@ -41,8 +41,11 @@
 	 				</div>
 				</div>
  			</form>
- 			<input type="file" name="file" lay-type="file" class="layui-upload-file">
  			</@shiro.hasPermission> 
+ 			<input type="file" name="file" lay-type="file" class="layui-upload-file">
+ 				<a class="layui-btn layui-btn-primary" id="btn-upload">
+					 <i class="layui-icon">&#xe609;</i> 文件下载
+				</a>
 		</span>
 		<span class="fr">
 			<div class="layui-form-pane">

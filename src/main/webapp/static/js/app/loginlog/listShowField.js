@@ -99,7 +99,7 @@ layui.use(['form','layer', 'laytpl', 'page_table', 'laydate', 'jacommon', 'tab']
 		"ordering" : false,
 		"bInfo" : true, // 是否显示页脚分页
 		"bPaginate" : true,
-		"stateSaveParams": function () {           // 初始化完成调用事件
+		"stateSaveParams": function () {          // 初始化完成调用事件
 			var fnames = ['userId','loginTime','loginIp','loginType','loginDesc'];
 			jacommon.addTableColumnNames(fnames);
 			jacommon.hideTableColumns(showField);
@@ -173,6 +173,9 @@ layui.use(['form','layer', 'laytpl', 'page_table', 'laydate', 'jacommon', 'tab']
 			}
 		}
 		refresh();
+	}).on('click','#btn-upload', function(){
+		var postUrl = WEB_ROOT + '/admin/role/rolesExport?t=' + new Date().getTime();
+		location.href=postUrl;
 	});
 	
 	// 回车事件监听
