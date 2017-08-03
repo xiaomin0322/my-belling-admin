@@ -4,6 +4,7 @@ delete from sys_role;
 delete from sys_user;
 delete from sys_settings;
 delete from sys_re_role_permission;
+delete from sys_re_user_role;
 
 
 INSERT INTO sys_permission VALUES ('3', '46', '用户管理', 'admin/user', '1', '1', '1', 'fa-user', '');
