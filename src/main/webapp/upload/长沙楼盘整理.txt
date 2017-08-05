@@ -1,0 +1,11 @@
+http://cs.fang.lianjia.com/loupan/p_aajzh/
+
+
+http://cs.fang.lianjia.com/loupan/p_aajwy/
+
+
+http://cs.fang.lianjia.com/loupan/p_htcjaalre/
+
+
+
+org.openqa.selenium.WebDriverException: chrome not reachable

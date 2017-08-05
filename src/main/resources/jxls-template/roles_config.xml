@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<workbook> 
+   <worksheet name="Sheet1"> 
+    <section startRow="0" endRow="0"/> 
+    <loop startRow="1" endRow="1" items="objList" var="objInfo" varType="com.belling.admin.model.Role"> 
+    <section startRow="1" endRow="1"> 
+    <mapping row="1" col="0">objInfo.name</mapping> 
+    <mapping row="1" col="1">objInfo.code</mapping> 
+    <mapping row="1" col="2">objInfo.sort</mapping> 
+    <mapping row="1" col="3">objInfo.description</mapping> 
+   </section> 
+    <loopbreakcondition> 
+     <rowcheck offset="0">
+        <cellcheck offset="0"></cellcheck> 
+      </rowcheck> 
+    </loopbreakcondition> 
+    </loop> 
+    </worksheet> 
+</workbook>
