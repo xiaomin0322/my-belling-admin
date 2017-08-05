@@ -24,13 +24,13 @@ layui.use(['form', 'layedit', 'jacommon', 'laydate', 'layer','element','form'], 
 			postData = data.field,
 			subBtn = $(data.elem),
 			btnText = subBtn.html();
-			if (postData.isMenu !== 'undefined' && postData.isMenu !== '' && postData.isMenu !== null && postData.open == 'on') {
+			if (postData.isMenu !== 'undefined' && postData.isMenu !== undefined && postData.isMenu !== '' && postData.isMenu !== null && postData.open == 'on') {
 				postData.isMenu = 1;
 			} else {
 				postData.isMenu = 0;
 			}
 			
-			if (postData.open !== 'undefined' && postData.open !== '' && postData.open !== null && postData.open == 'on') {
+			if (postData.open !== 'undefined' && postData.open !== undefined && postData.open !== '' && postData.open !== null && postData.open == 'on') {
 				postData.isEnable = 1;
 			} else {
 				postData.isEnable = 0;
