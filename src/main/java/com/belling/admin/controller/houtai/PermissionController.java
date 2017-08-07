@@ -140,8 +140,14 @@ public class PermissionController extends BaseController {
 			permission = permissionService.get(id);
 		}
 		
+		if(pId==null){
+			pId = permission.getPId();
+		}
+		//获取父类对象
+		Permission permissionperParent = permissionService.get(pId);
+		model.addAttribute("permissionperParent", permissionperParent);
 		model.addAttribute("vo", permission);
-		return "/permission/edit";
+		return "/permission/edit2";
 	}
 	
 	
