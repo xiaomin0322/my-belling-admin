@@ -3,9 +3,15 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+
+import ChartDirector.Chart;
 import ChartDirector.ChartViewer;
 import ChartDirector.PieChart;
 
@@ -49,6 +55,14 @@ public class Anglepie implements DemoModule
 
         // Explode the 1st sector (index = 0)
         c.setExplode(0);
+        
+        byte[] bytes = c.makeChart(Chart.PNG);
+        
+        try {
+			FileUtils.writeByteArrayToFile(new File("d:\\test.png"), bytes);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
         // Output the chart
         viewer.setChart(c);

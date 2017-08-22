@@ -309,7 +309,14 @@
 		    <artifactId>jxls-reader</artifactId>
 		    <version>1.0.6</version>
 		</dependency>
-		
+		<!-- mvn install:install-file  -Dfile=D:\workspace\my-belling-admin\lib\ChartDirector_s.jar  -DgroupId=org.belling -DartifactId=chartdirector -Dversion=0.0.1 -Dpackaging=jar -->
+		<dependency>
+		    <groupId>org.belling</groupId>
+		    <artifactId>chartdirector</artifactId>
+		    <version>0.0.1</version>
+		    <!-- <scope>system</scope>
+		    <systemPath>${project.basedir}/lib/ChartDirector_s.jar</systemPath> -->
+		</dependency>
 		
 	</dependencies>
 	<build>
@@ -338,9 +345,9 @@
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
-					<compilerArguments>  
+					<!-- <compilerArguments>  
 					<extdirs>lib</extdirs>  
-					</compilerArguments>  
+					</compilerArguments>   -->
 				</configuration>
 			</plugin>
 			<plugin>
@@ -381,7 +388,7 @@
 				<configuration>
 					<warSourceExcludes>lib/**</warSourceExcludes>
 					<warSourceExcludes>WEB-INF/.CFMPP/**</warSourceExcludes>
-					 <webResources> 
+					 <!-- <webResources> 
 		                <resource>    
 		                    <directory>lib/</directory>    
 		                    <targetPath>WEB-INF/lib</targetPath>    
@@ -389,7 +396,7 @@
 		                        <include>**/*.jar</include>    
 		                    </includes>    
 		                </resource>    
-		           </webResources>  
+		           </webResources>   -->
 				</configuration>
 			</plugin>
 		</plugins>
