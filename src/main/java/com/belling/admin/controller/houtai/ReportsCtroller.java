@@ -50,7 +50,7 @@ import com.google.common.base.Strings;
  */
 @Controller
 @RequestMapping("/admin/reports")
-public class ChartdirectorCtroller extends BaseController {
+public class ReportsCtroller extends BaseController {
 	
 	
 	
